@@ -2,6 +2,7 @@ import { useState } from 'react'
 
 import { login } from './features/Auth-slice'
 import { useAppDispatch } from './app/hook'
+import { useFetchProductsQuery,useFetchProductQuery } from './features/products/products-slice'
 
 import './App.css'
 
@@ -10,6 +11,11 @@ function App() {
 
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
+  const [ newid ,setNewid] = useState<number>(19)
+
+  const { data = [], isFetching } = useFetchProductsQuery()
+  
+  const { data: product ,isFetching: Loading } = useFetchProductQuery(newid)
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => { 
     e.preventDefault()
@@ -20,6 +26,22 @@ function App() {
 
   return (
     <>
+      <div className="">
+        <h1>Product</h1>
+        {Loading ? <h2>Loading...</h2> : <p>{product?.description}</p>}
+        <select name="" id="" value={newid} onChange={(e) => setNewid(Number(e.target.value))} >
+          <option value="19">19</option>
+          <option value="14">14</option>
+          <option value="13">13</option>
+          <option value="12">12</option>
+          <option value="9">9</option>
+          <option value="8">8</option>
+        </select>
+
+        <h1>Products</h1>
+        {isFetching ? <h2>Loading...</h2> : <p>{data.length}</p>}
+      </div>
+
       <form onSubmit={handleSubmit}>
         <div className="form-outline mb-4">
           <input

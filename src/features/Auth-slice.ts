@@ -1,4 +1,6 @@
-import { createSlice,createAsyncThunk} from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+
+
 
 import axios from "axios";
 
@@ -13,7 +15,7 @@ interface UserDataType{
     
 //     userLogin: {}; 
 // }
-
+  
 const initialState = {
     loading:false,
     error: "",
